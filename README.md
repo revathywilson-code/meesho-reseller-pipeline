@@ -103,14 +103,14 @@ data/resellers.csv
 data/orders.csv
 data/meesho_reseller.db
 ```
-# Expected dataset contents:
+## Expected dataset contents:
 ```text
 24 resellers
 900 orders
 300 orders each for April, May, and June
 ```
 
-# Verify the generated data
+## Verify the generated data
 
 Before writing SQL, verify:
 ```text
@@ -192,11 +192,12 @@ The narrative layer:
 - prevents raw reseller-name leakage by using coded aliases.
 
 Verify that:
-`prompt_pack.md` contains Trigger, Input list, Prompt, and Checklist.
-`narrative_report.md` contains the May Ethnic Wear +77.1% narrative.
-`narrative_report.md` contains the June Ethnic Wear -58.74% narrative.
-All 3 chart-choice questions are answered in text.
-The top-reseller narrative uses aliases instead of raw reseller names.
+- `prompt_pack.md` contains Trigger, Input list, Prompt, and Checklist.
+- `narrative_report.md` contains the May Ethnic Wear +77.1% narrative.
+- `narrative_report.md` contains the June Ethnic Wear -58.74% narrative.
+- All 3 chart-choice questions are answered in text.
+- The top-reseller narrative uses aliases instead of raw reseller names.
+
 Optional local masking test:
 ```powershell
 py -m pytest part3_narrative/test_masking.py -vv
@@ -218,7 +219,6 @@ Verification:
 ```text
 5 passed
 ```
-
 The tests cover:
 
 - May scenario: April → May
