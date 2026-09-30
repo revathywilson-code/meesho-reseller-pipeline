@@ -269,4 +269,3 @@ part4_agent/mock_agent_runner.py
 README.md
 ```
 
-Then submit **only the public GitHub repository link**, as required by the assignment.
