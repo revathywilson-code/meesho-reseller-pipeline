@@ -61,6 +61,17 @@ meesho-reseller-pipeline/
 │
 └── README.md
 ```
+## Extra helper/testing files
+The repository may also contain these files. They are not explicitly required by the submission checklist; they are included only to make the project easier to execute, verify, and test locally:
+```text
+part1_sql/run_queries.py
+part3_narrative/test_masking.py
+part4_agent/test_mock_agent_runner.py
+```
+`part1_sql/run_queries.py` is a convenience script for generating the Part 1 CSV outputs.
+`part3_narrative/test_masking.py` verifies the reseller-alias masking behavior.
+`part4_agent/test_mock_agent_runner.py` verifies the mock-agent acceptance scenarios.
+These files are for local execution/testing support and are not additional graded requirements.
 
 ## Requirements
 
@@ -92,6 +103,25 @@ data/resellers.csv
 data/orders.csv
 data/meesho_reseller.db
 ```
+# Expected dataset contents:
+```text
+24 resellers
+900 orders
+300 orders each for April, May, and June
+```
+
+# Verify the generated data
+
+Before writing SQL, verify:
+```text
+resellers.csv → 24 data rows
+orders.csv → 900 data rows
+```
+```text
+April → 300
+May   → 300
+June  → 300
+```
 
 The dataset uses a fixed random seed, so the expected business results remain reproducible.
 
@@ -112,6 +142,8 @@ The most important hand-off file is:
 ```text
 part1_sql/output/monthly_category_revenue.csv
 ```
+It must contain exactly 15 month/category rows.
+5 categories × 3 months = 15
 
 That feed is consumed by Part 2.
 
@@ -159,12 +191,32 @@ The narrative layer:
 - provides concrete recommendations;
 - prevents raw reseller-name leakage by using coded aliases.
 
+Verify that:
+`prompt_pack.md` contains Trigger, Input list, Prompt, and Checklist.
+`narrative_report.md` contains the May Ethnic Wear +77.1% narrative.
+`narrative_report.md` contains the June Ethnic Wear -58.74% narrative.
+All 3 chart-choice questions are answered in text.
+The top-reseller narrative uses aliases instead of raw reseller names.
+Optional local masking test:
+```powershell
+py -m pytest part3_narrative/test_masking.py -vv
+```
+Expected result:
+```text
+4 passed
+```
+This test file is an optional local verification helper and is not explicitly required by the assignment.
+
 ### Part 4 — Run the mock agent
 
 Run the Part 4 tests:
 
 ```powershell
 py -m pytest part4_agent/test_mock_agent_runner.py -vv
+```
+Verification:
+```text
+5 passed
 ```
 
 The tests cover:
@@ -244,7 +296,7 @@ The “AI narrative” step is implemented as a deterministic offline template-f
 
 The graded deliverable is **one public GitHub repository** containing the required project files.
 
-Before submitting, verify that the repository contains:
+Verify that the repository contains:
 
 ```text
 data/generate_dataset.py
